@@ -29,18 +29,20 @@ public class Song {
   }
 
   public static List<Song> all() {
-    String sql = "SELECT id, name FROM songs";
+    String sql = "SELECT id, name, decadeId FROM songs";
     try(Connection con = DB.sql2o.open()) {
     return con.createQuery(sql).executeAndFetch(Song.class);
     }
   }
 
-  public static void clear() {
-    instances.clear();
-  }
-
   public static Song find(int id) {
-    return instances.get(id - 1);
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM songs where id=:id";
+      Song song = con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Song.class);
+      return song;
+    }
   }
 
   @Override
@@ -50,20 +52,18 @@ public class Song {
     } else {
       Song newSong = (Song) otherSong;
       return this.getName().equals(newSong.getName()) &&
-             this.getId() == newSong.getId() &&
              this.getDecadeId() == newSong.getDecadeId();
     }
   }
 
-
-  // public void save() {
-  //     try(Connection con = DB.sql2o.open()) {
-  //       String sql = "INSERT INTO tasks(description, categoryId) VALUES (:description, :categoryId)";
-  //       this.id = (int) con.createQuery(sql, true)
-  //         .addParameter("description", this.description)
-  //         .addParameter("categoryId", this.categoryId)
-  //         .executeUpdate()
-  //         .getKey();
-  //     }
-  //   }
+  public void save() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO songs(name, decadeId) VALUES (:name, :decadeId);";
+      this.id = (int) con.createQuery(sql, true)
+        .addParameter("name", this.name)
+        .addParameter("decadeId", this.decadeId)
+        .executeUpdate()
+        .getKey();
+    }
+  }
 }

@@ -1,0 +1,41 @@
+<!--index.vtl-->
+<h1>Music of the Decades!</h1>
+
+<h2> All Decades: </h2>
+#if($decades)
+  <p>Click on a decade to see its top songs:</p>
+  <ul>
+    #foreach ($decade in $decades)
+      <li><a href="/decades/$decade.getId()">$decade.getName()</a></li>
+    #end
+  </ul>
+#else
+  <p>There are no decades yet!</p>
+#end
+
+<h2>New Decade:</h2>
+
+<form action="/decades" method="post">
+  <label for="name">Decade name</label>
+  <input id="name" name="name" type="text">
+  <button type="submit" class="btn btn-success">Add Decade</button>
+</form>
+
+<h2>New Song:</h2>
+
+<form action="/songs" method="post">
+  <label for="decadeId">Select a decade</label>
+  <select id='decadeId' name='decadeId' type='text'>
+    #foreach($decade in $decades)
+      <option value="$decade.getId()">$decade.getName()</option>
+    #end
+  </select>
+
+  <div class="form-group">
+    <label for="name">Song Name</label>
+    <input id="name" name="name" type="text" class="form-control">
+  </div>
+
+  <button type="submit" class="btn btn-success">Add Song</button>
+</form>
+<!--index.vtl-->

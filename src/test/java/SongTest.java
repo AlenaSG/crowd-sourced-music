@@ -12,8 +12,10 @@ public class SongTest {
   @After
   public void tearDown() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "DELETE FROM songs *;";
-      con.createQuery(sql).executeUpdate();
+      String deleteSongsQuery = "DELETE FROM songs *;";
+      String deleteDecadesQuery = "DELETE FROM decades *;";
+      con.createQuery(deleteSongsQuery).executeUpdate();
+      con.createQuery(deleteDecadesQuery).executeUpdate();
     }
   }
 
@@ -36,31 +38,18 @@ public class SongTest {
   }
 
   @Test
-  public void all_returnsAllInstancesOfSong_true() {
-    Song firstSong = new Song("Vogue", 1);
-    Song secondSong = new Song("Secret", 2);
-    assertEquals(true, Song.all().contains(firstSong));
-    assertEquals(true, Song.all().contains(secondSong));
-  }
-
-  @Test
-  public void clear_emptiesAllSongsFromArrayList_0() {
-    Song firstSong = new Song("Vogue", 1);
-    Song.clear();
-    assertEquals(0, Song.all().size());
-  }
-
-  @Test
   public void getId_songsInstantiateWithAnID_1() {
-    //Song.clear();
     Song mySong = new Song("Vogue", 1);
-    assertEquals(1, mySong.getId());
+    mySong.save();
+    assertTrue(mySong.getId() > 0);
   }
 
   @Test
-  public void find_returnsSongWithSameId_secondTask() {
+  public void find_returnsSongWithSameId_secondSong() {
     Song firstSong = new Song("Vogue", 1);
-    Song secondSong = new Song("Secret", 2);
+    firstSong.save();
+    Song secondSong = new Song("Secret", 1);
+    secondSong.save();
     assertEquals(Song.find(secondSong.getId()), secondSong);
   }
 
@@ -68,7 +57,43 @@ public class SongTest {
   public void equals_returnsTrueIfDescriptionsAretheSame() {
     Song firstSong = new Song("Vogue", 1);
     Song secondSong = new Song("Vogue", 1);
+    //System.out.println("first song: " + firstSong.getDecadeId());
+    //System.out.println("second song: " + secondSong.getDecadeId());
     assertTrue(firstSong.equals(secondSong));
   }
 
+  @Test
+  public void save_returnsTrueIfNameAretheSame() {
+    Song mySong = new Song("Vogue", 1);
+    mySong.save();
+    assertTrue(Song.all().get(0).equals(mySong));
+  }
+
+  @Test
+  public void all_returnsAllInstancesOfSong_true() {
+    Song firstSong = new Song("Vogue", 1);
+    firstSong.save();
+    Song secondSong = new Song("Secret", 1);
+    secondSong.save();
+    assertEquals(true, Song.all().get(0).equals(firstSong));
+    assertEquals(true, Song.all().get(1).equals(secondSong));
+  }
+
+  @Test
+  public void save_assignsIdToObject() {
+    Song mySong = new Song("Vogue", 1);
+    mySong.save();
+    Song savedSong = Song.all().get(0);
+    assertEquals(mySong.getId(), savedSong.getId());
+  }
+
+  @Test
+  public void save_savesDecadeIdIntoDB_true() {
+    Decade myDecade = new Decade("90s");
+    myDecade.save();
+    Song mySong = new Song("Vogue", myDecade.getId());
+    mySong.save();
+    Song savedSong = Song.find(mySong.getId());
+    assertEquals(savedSong.getDecadeId(), myDecade.getId());
+  }
 }

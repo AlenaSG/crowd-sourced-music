@@ -26,14 +26,14 @@ _This is a music website where users can view the top songs from different decad
 * _DELETE FROM songs;_
 * _DELETE FROM decades;_
 * _DROP DATABASE crowd_sourced_music_test;_
-* _In your "normal" terminal window, not psql, enter: pg_dump to_do > media.sql_
+* _In your "normal" terminal window, not psql, enter: pg_dump crowd_sourced_music > media.sql_
 * _Add changes via add . and commit your changes_
 * _Upload project to Github._
 
 ## To Restore Databases:
 * _Clone the database from Github_
 * _Connect to psql and run: CREATE DATABASE crowd_sourced_music;_
-* _Run the following command in the terminal (not psql): psql to_do < media.sql_
+* _Run the following command in the terminal (not psql): psql crowd_sourced_music < media.sql_
 * _Confirm success.  Switch to psql and run:  \c crowd_sourced_music_
 * _Then run: \dt_
 

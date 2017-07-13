@@ -6,7 +6,8 @@
   <p>Click on a decade to see its top songs:</p>
   <ul>
     #foreach ($decade in $decades)
-      <li><a href="/decades/$decade.getId()"><img height="150" style="border: none;" src="$decade.getImage()"></a></li>
+      <li><a href="/decades/$decade.getId()">$decade.getName()</a></li>
+      <a href="/decades/$decade.getId()"><img height="150" width = "175" style="border: none;" src="$decade.getImage()"></a>
     #end
   </ul>
 #else

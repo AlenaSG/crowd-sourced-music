@@ -1,0 +1,21 @@
+<!--decade.vtl-->
+<h1>$decade.getName() songs:</h1>
+
+<ul>
+  #foreach($song in $decade.getSongs())
+   <li><a href="/decades/$decade.getId()/songs/$song.getId()">$song.getName()</a></li>
+  #end
+</ul>
+
+<h2>Edit decade:</h2>
+
+<form action="/decades/$decade.getId()" method="post">
+  <label for="name">Name</label>
+  <input id="name" name="name" type="text">
+  <button type="submit" class="btn btn-info">Update Decade</button>
+</form>
+
+<a href="/decades/$decade.getId()/songs/new">Add a new song</a>
+<a href="/decades">All decades</a>
+<!--decade.vtl-->
+ 

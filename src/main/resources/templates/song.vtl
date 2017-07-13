@@ -1,0 +1,18 @@
+<!--song.vtl-->
+<h1>$song.getName()</h1>
+<h2> Belongs to: $decade.getName() list.</h2>
+
+<h2>Edit song:</h2>
+
+<form action="/decades/$song.getDecadeId()/songs/$song.getId()" method="post">
+  <label for="name">Song Title</label>
+  <input id="name" name="name" type="text">
+  <button type="submit" class="btn btn-info">Update Song</button>
+</form>
+
+<form action="/decades/$song.getDecadeId()/songs/$song.getId()/delete" method="post">
+  <button type="submit" class="btn btn-danger" id="delete-song">Delete Song</button>
+</form>
+
+<a href="/decades/$decade.getId()">Return to $decade.getName()</a>
+<!--song.vtl-->

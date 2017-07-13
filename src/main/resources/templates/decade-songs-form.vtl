@@ -1,0 +1,12 @@
+<h1>Add a song to $decade.getName()</h1>
+
+<form action="/songs" method="post">
+  <input id="decadeId" name="decadeId" type="hidden" value="$decade.getId()">
+
+  <div class="form-group">
+    <label for="name">Song Title</label>
+    <input id="name" name="name" type="text" class="form-control">
+  </div>
+
+  <button type="submit" class="btn btn-success">Add Song</button>
+</form>

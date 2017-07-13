@@ -1,0 +1,7 @@
+<h1>All decades</h1>
+<ul>
+  #foreach ($decade in $decades)
+    <li><a href="/decades/$decade.getId()">$decade.getName()</a></li>
+  #end
+</ul>
+<a href="/decades/new">Add New Decade</a>

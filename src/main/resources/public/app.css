@@ -1,0 +1,23 @@
+body {
+  background-color: #00334d;
+}
+
+h1 {
+  color: white;
+}
+
+h2 {
+  color: #e60073;
+}
+
+p {
+  color:  #ffcce5;
+}
+
+label {
+  color:  #ffcce5;
+}
+
+.btn-success {
+  background-color: #99ddff;
+}

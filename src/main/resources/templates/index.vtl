@@ -6,8 +6,7 @@
   <p>Click on a decade to see its top songs:</p>
   <ul>
     #foreach ($decade in $decades)
-      <li><a href="/decades/$decade.getId()">$decade.getName()</a></li>
-      <img height="150" style="border: none;" src="https://in.bookmyshow.com/entertainment/wp-content/uploads/2017/05/headphones-424163_960_720-min-450x270.jpg">
+      <li><a href="/decades/$decade.getId()"><img height="150" style="border: none;" src="$decade.getImage()"></a></li>
     #end
   </ul>
 #else
@@ -19,8 +18,11 @@
 <form action="/decades" method="post">
   <label for="name">Decade name</label>
   <input id="name" name="name" type="text">
-  <button type="submit" class="btn btn-success">Add Decade</button>
+  <label for="image">Image link</label>
+  <input id="image" name="image" type="text" required>
+  <button type="submit" class="btn btn-success">Add Decade and Image!</button>
 </form>
+
 
 <h2>New Song:</h2>
 

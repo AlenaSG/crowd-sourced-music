@@ -7,12 +7,15 @@ public class Decade {
   private static List<Decade> instances = new ArrayList<Decade>();
   private int id;
   private List<Song> songs;
+  private String image;
 
-  public Decade(String name) {
+  public Decade(String name, String image) {
     this.name = name;
     instances.add(this);
     id = instances.size();
     songs = new ArrayList<Song>();
+    this.image = image;
+
   }
 
   public String getName() {
@@ -23,8 +26,12 @@ public class Decade {
     return id;
   }
 
+  public String getImage() {
+    return image;
+  }
+
   public static List<Decade> all() {
-    String sql = "SELECT id, name FROM decades";
+    String sql = "SELECT id, name, image FROM decades";
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Decade.class);
     }
@@ -62,9 +69,10 @@ public class Decade {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO decades (name) VALUES (:name);";
+      String sql = "INSERT INTO decades (name, image) VALUES (:name, :image);";
       this. id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
+        .addParameter("image", this.image)
         .executeUpdate()
         .getKey();
     }

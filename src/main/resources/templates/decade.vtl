@@ -15,6 +15,10 @@
   <button type="submit" class="btn btn-info">Update Decade</button>
 </form>
 
+<form action="/decades/$decade.getId()/delete" method="post">>
+  <button type="submit" class="btn btn-danger" id="delete-decade">Delete Decade</button>
+</form>
+
 <a href="/decades/$decade.getId()/songs/new">Add a new song</a>
 <a href="/decades">All decades</a>
 <!--decade.vtl-->

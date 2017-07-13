@@ -31,10 +31,10 @@ _This is a music website where users can view the top songs from different decad
 * _Upload project to Github._
 
 ## To Restore Databases:
-* _Clone the database from Github_
+* _Clone the repository from Github_
 * _Connect to psql and run: CREATE DATABASE crowd_sourced_music;_
 * _Run the following command in the terminal (not psql): psql crowd_sourced_music < media.sql_
-* _Confirm success.  Switch to psql and run:  \c crowd_sourced_music_
+* _Confirm success.  Switch to psql and run:  \c_
 * _Then run: \dt_
 
 ## Known Bugs

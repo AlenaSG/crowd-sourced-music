@@ -109,5 +109,15 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    post("/decades/:id/delete", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Decade decade = Decade.find(Integer.parseInt(request.params("id")));
+      // Decade decade = Decade.find(song.getDecadeId());
+      decade.delete();
+      model.put("decade", decade);
+      model.put("template", "templates/decades.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
   }
 }
